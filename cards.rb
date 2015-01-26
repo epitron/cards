@@ -6,7 +6,7 @@ class Card
   NUMS  = [*2..10]
   FACES = %w[J Q K A]
 
-  DECK  = (NUMS + FACES).map{ |val| SUITS.map{ |suit| [val, suit] } }.flatten(1)
+  DECK  = (NUMS + FACES).product(SUITS)
 
   def initialize(pos=0)
     @pos = pos
