@@ -46,7 +46,40 @@ end
 # Create a 5 deck shoe...
 p (Card.all * 5).shuffle
 
+class Hand
 
+  def size
+    raise "Unimplemented error"
+  end
+
+  def initialize(deck)
+    deck.take(size)
+  end
+
+end
+
+class PokerHand < Hand
+ [:highest_card, :pair, :two_pair, :triple, :straight, :full_house, :flush, [:straight, :flush], :four_of_a_kind, [:royal, :flush]
+
+  TYPES = {
+    straight: proc { |cards|  }
+    straight: proc { |cards|  }
+    straight: proc { |cards|  }
+    straight: proc { |cards|  }
+    straight: proc { |cards|  }
+  }
+
+  include Comparable
+  def <=>(other)
+  end
+
+  def size; 5; end
+
+  def initialize(deck)
+    deck.take(size)
+  end
+
+end
 
 # SUITS = %w[Clubs Diamonds Hearts Spades]
 # FACES = %w[Jack Queen King Ace]
