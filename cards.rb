@@ -1,40 +1,18 @@
-require 'epitools'
-
 class Card
-
-  include Comparable
-
   attr_reader :pos
 
-  # SUITS = %w[Clubs Diamonds Hearts Spades]
-  # FACES = %w[Jack Queen King Ace]
-  # DECK = %w[
-  #   🂡 🂱 🃁 🃑
-  #   🂢 🂲 🃂 🃒
-  #   🂣 🂳 🃃 🃓
-  #   🂤 🂴 🃄 🃔
-  #   🂥 🂵 🃅 🃕
-  #   🂦 🂶 🃆 🃖
-  #   🂧 🂷 🃇 🃗
-  #   🂨 🂸 🃈 🃘
-  #   🂩 🂹 🃉 🃙
-  #   🂪 🂺 🃊 🃚
-  #   🂫 🂻 🃋 🃛
-  #   🂬 🂼 🃌 🃜
-  #   🂭 🂽 🃍 🃝
-  #   🂮 🂾 🃎 🃞
-  # ]
-
+  # Constants
   SUITS = %w[♠ ♥ ♦ ♣]
   NUMS  = [*2..10]
   FACES = %w[J Q K A]
-  
-  DECK = (NUMS + FACES) * SUITS
 
-  def <=>(other)
-    pos <=> other.pos
+  DECK  = (NUMS + FACES).map{ |val| SUITS.map{ |suit| [val, suit] } }.flatten(1)
+
+  def initialize(pos=0)
+    @pos = pos
   end
 
+  # Class methods
   def self.first
     Card.new(0)
   end
@@ -43,20 +21,49 @@ class Card
     Card.new(DECK.size-1)
   end
 
-  def self.deck
+  def self.all
     (Card.first..Card.last).to_a
   end
 
-  def initialize(pos=0)
-    @pos = pos
+
+  # Instance methods
+  include Comparable
+
+  def <=>(other)
+    pos <=> other.pos
   end
 
   def succ
-    Card.new(@pos + 1)
+    Card.new(pos + 1)
   end
 
   def inspect
-    "#{DECK[@pos]}"
+    "#{DECK[pos].join}"
   end
 end
+
+
+p Card.all * 3
+
+
+
+
+# SUITS = %w[Clubs Diamonds Hearts Spades]
+# FACES = %w[Jack Queen King Ace]
+# DECK = %w[
+#   🂡 🂱 🃁 🃑
+#   🂢 🂲 🃂 🃒
+#   🂣 🂳 🃃 🃓
+#   🂤 🂴 🃄 🃔
+#   🂥 🂵 🃅 🃕
+#   🂦 🂶 🃆 🃖
+#   🂧 🂷 🃇 🃗
+#   🂨 🂸 🃈 🃘
+#   🂩 🂹 🃉 🃙
+#   🂪 🂺 🃊 🃚
+#   🂫 🂻 🃋 🃛
+#   🂬 🂼 🃌 🃜
+#   🂭 🂽 🃍 🃝
+#   🂮 🂾 🃎 🃞
+# ]
 
