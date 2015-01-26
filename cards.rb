@@ -43,8 +43,8 @@ class Card
 end
 
 
-p Card.all * 3
-
+# Create a 5 deck shoe...
+p (Card.all * 5).shuffle
 
 
 
