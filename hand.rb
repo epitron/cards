@@ -1,3 +1,5 @@
+require './deck'
+require './card'
 
 class Hand < Array
 

@@ -1,3 +1,5 @@
+require "./card"
+
 class OutOfCardsError < Exception; end
 
 class Deck < Array
