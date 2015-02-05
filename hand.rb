@@ -11,14 +11,12 @@ end
 
 class PokerHand < Hand
 
+  attr_reader :cards
+
   def hand_size; 5; end
 
   def initialize(deck)
-    deck.take(size)
-  end
-
-  def size
-    5
+    @cards = deck.deal(hand_size)
   end
 
   def highest
@@ -29,19 +27,20 @@ class PokerHand < Hand
     cards.sort.first
   end
 
+  def groups_of(n, on=:value)
+    cards.group_by(&on).select { |k,v| v.size == n }
+  end
+
   def pairs
     groups_of(2)
   end
+
   def one_pair?
     pairs.size == 1
   end
 
   def two_pair?
     pairs.size == 2
-  end
-
-  def groups_of(n, on=:value)
-    cards.group_by(&on).select { |k,v| v.size == n }
   end
 
   def triples
@@ -92,6 +91,7 @@ class PokerHand < Hand
 
 
   include Comparable
+
   def <=>(other)
 
   end
